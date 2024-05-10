@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Match Live NabFootball</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="Nab_Football__.png" type="image/png"> <!-- Replace with the actual path to your icon -->
+
+  <title>Live Video Stream</title>
+
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<body>
+  
+  <header>
+    <div class="header-container">
+        <h1>Match live</h1>
+        <a href="today.html">
+            <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Nab Football" class="pic" >
+                    </a>
+        
+        <nav>
+            <ul>
+                <li><a href="#">مباريات الغد</a></li>
+                <li><a href="#">مباريات اليوم</a></li>
+                <li><a href="#">مباريات الغد</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="matchstream">
+
+</div>
+<script>
+  const firebaseConfig = {
+      apiKey: "AIzaSyAqrwNjKdOU3ushEVHVJkAGi7H2GCFf-f8",
+      auomain: "iptv-ed2fd.firebaseapp.com",
+      projectId: "iptv-ed2fd",
+      storageBucket: "iptv-ed2fd.appspot.com",
+      messagingSenderId: "786992942535",
+      appId: "1:786992942535:web:08a7c01d0da525cba15de2",
+      measurementId: "G-DCP709H71M"
+    };
+          const app = firebase.initializeApp(firebaseConfig);
+          const db = firebase.firestore();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const OxOO02Id = urlParams.get('utm_source');
+            const OxOO02 = OxOO02Id.split('/');
+            
+            db.collection("match").doc(OxOO02[1]).get().then((doc) => {
+                if (doc.exists) {
+                  console.log("dkhal");
+                    const matata = doc.data();
+                    const matchItem = document.createElement("div");
+                    matchItem.innerHTML = `
+                    <div class="container">
+         <div class="center-live">
+
+    <h2 style="text-align: right;">   ماتش لايف مباراة ${matata.teamA} و ${matata.teamB}</h2>
+    <br>
+    <p><strong> ${matata.desc}<strong></p>
+        <h2>مشاهدة قناة 1 بث مباشر${matata.channel} live channel لايف بدون تقطيع  اون لاين مجانا  ${matata.channel} بث مباشر
+        <h2>مشاهدة قناة  ${matata.channel}</h2>
+        <p><strong> الجديد مشاهدة قناة 1${matata.channel} live channel بث مباشر مباريات اليوم والتي وظهرت بسرعة في عالم الرياضة بسبب المميزات العديدة حيث تبث قناة  بث مباشر جميع الدوريات والبطولات الخاصة بكرة القدم العربية والاوروبية والعالمية، كما تتميز ${matata.channel} live بالنقل الحصري لجميع مباريات دوري ابطال اوربا ودوري ابطال أفريقيا والدوريات المختلفة، وتضم قناة${matata.channel} نخبة من أفضل المعلقين الرياضيين المميزين مثل حفيظ الدراجي ورؤوف خليف وعصام الشوالي وخليل البلوشي  يوفر لكم مشاهدة قناة 1 بشكل مجاني بدون تقطيع علي الذي ينقل لكم أحدث اخبار التي يبحث عنها, وأيضًا استوديو تحليلي ممتاز مع أفضل المحللين واللاعبين السابقين المميزين وتفوقت 1 في مجالها بسبب الاستديوهات التحليلة التي حرصت ادارة القناة علي اختيارهم بعناية.</strong></p>
+        <h2>تردد قناة  ${matata.channel}</h2>
+        <p><strong>تعرض قناة${matata.channel} مباريات الدوري الانجليزي بجودات متعددة ومتميزة لتناسب كافة المشاهدين مع العديد من الصحافيين والمعلقين الاكفاء في الاستوديوهات التحليلة واثناء المباريات، توفر قناة 1 أيضًا مشاهدة مباريات الدوري الاسباني وأهم انديتة منها ريال مدريد وبرشلونة وأيضاً مباريات الدوري الانجليزي وأهمهم ليفربول ومانشستر سيتي وكثير من المحترفين العرب يلعبون فى الاندية و الدوريات الاوروبية فكما نعلم جميعا ان محمد صلاح فخر العرب يلعب في ليفروبول والعديد من المحترفين العرب والنجوم الاجانب علي موقع&nbsp;.</strong><br>
+        <strong>تتميز قناة${matata.channel} بامتلاك حقوق واحد من أفضل الدوريات الأوروبية وهو دوري أبطال أوروبا الذي تتنافس فيه العديد من أفضل الأندية الأوروبية مثل ليفربول وريال مدريد ومانشستر سيتي وبرشلونة وبايرن ميونخ ومانشستر يونايتد وباريس سان جيرمان وغيرها من الأندية الأخرى التي تقدم متعة كروية لكل مشاهديها ومتابعيها العرب والاجانب حيث يهتم العالم بالكامل بدوري أبطال أوروبا حيث يجدون فية متعه كبيرة وغير متناهيه/ ونقدم لكم بث قناة  ${matata.channel} على اليوتيوب بدون تقطيع وسيرفرات متعددة الجودة وتحديث باستمرار لسيرفرات البث تجنباً للبطئ والتعطيل.</strong></p>
+
+          <iframe allowfullscreen="true" frameborder="0" height="500px" scrolling="1" src=${matata.url} width="100%"></iframe>
+          
+          <h2>.بطاقة مباراة ${matata.teamA} و ${matata.teamB}  </h2>
+          <table class="table table-bordered"><tbody>
+              <tr>
+                 <th> ${matata.dawri}<hr> </th>
+                 <td>البطولة<hr></td>
+              </tr>
+             
+              <tr>
+                  <th>  ${matata.date_debut} <hr></th>
+                  <td> موعد المباراة<hr></td>
+                  
+              </tr>
+             
+              <tr>
+                <th>  ${matata.date_debut} بتوقيت غرينيتش<hr></th> 
+                <td>  توقيت المباراة<hr></td>
+              </tr>
+            
+              <tr>
+                <th>  ${matata.channel}  <hr></th>
+                <td>  القناة الناقله <hr></td>
+              </tr>
+             
+              <tr>
+                <th>  ${matata.commentaire}  <hr></th>
+                <td>معلق المباراة <hr></td>
+              </tr>
+              
+              <tr>
+                <th> ${matata.terrain}<hr></th>
+                <td>ملعب المباراة <hr></td>
+              </tr>
+          </tbody></table>
+          <h2>تردد القناة  علي القمر نايل سات  ${matata.channel}بث مباشر</h2>
+        <p>التردد: 11084<br>
+        الاستقطاب: أفقي<br>
+        معامل ترميز: 27500<br>
+        تصحيح الخطأ: 6/5</p>
+        <h2>تردد القناة  علي القمر عرب سات  ${matata.channel}بث مباشر</h2>
+        <p>التردد: 12379<br>
+        الاستقطاب: أفقي<br>
+        معامل الترميز: 27500<br>
+        تصحيح الخطأ: 6/5</p>
+        <h2>تردد القناة  علي القمر سهيل سات  ${matata.channel}بث مباشر</h2>
+        <p>التردد: 11547<br>
+        الاستقطاب: أفقي<br>
+        معامل الترميز: 27500<br>
+        تصحيح الخطأ: 6/5</p>
+        <h2>قناة  ${matata.channel}</h2>
+        <p><strong>توفر قناة${matata.channel} تغطية خاصة وحصرية لجميع محبي الدوري الاسباني الذي يحتوي على أقوى فرق أوروبا مثل ريال مدريد وبرشلونة واتليتيكو مدريد وغيرها، مشاهدة قناة  ${matata.channel}  Live اتش دي مجانا وبدون اعلانات مزعجة بجودة عالية بدون تقطيع وأهم مباريات اليوم اون لاين لمشاهدة المباريات اون لاين بث مباشر للمباريات ومشاهدة جميع قنوات 1 كاملة اتش دي مجانا عند متابعتك لقناة${matata.channel} سوف تشعر بالمتعه الحقيقة حيث تقوم القناة ببث كل ما هو جديد فيما يتعلق الرياضة العربية والعالمية، وتقوم أيضًا بتغطية آخر الأخبار والأحداث بالإضافة إلى مشاهدة مباريات أقوى الدوريات الأوروبية والمسابقات الدولية العالمية والعربية الهامة علي موقع&nbsp;<a href="today.html">Nab Foot</a>.</strong></p>
+        </div>
+      </div>
+                    `;
+                    const matchStreamContainer = document.getElementById("matchstream"); // Make sure you have an element with id "matchstream" in your HTML
+                    matchStreamContainer.appendChild(matchItem);
+                }else{
+                  console.log("dkhal");
+
+                }
+            });
+        </script>
+<div class="container">
+  <div class="center-live">
+      <a href="today.html">
+          <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Nab Football" class="pic" >
+                  </a>
+      <hr>
+      <p>موقع كورة اونلاين بث مباشر مباريات اليوم جوال بدون تقطيع في جميع البطولات من خلال رابط Match live الذى يعد احد اهم مواقع البث المباشر التي يقدم لكم مشاهدة اهم مباريات اليوم عبر قنوات Nab Foot حصري في جميع البطولات العربية والعالمة الاوروبية منها والمحالية لجميع اندية العالم وكذلك مشاهدة مباريات المنتخبات في كافة البطولات ، على موقع كورة اونلاين سوف تجد جميع روابط البث المباشر لمباريات اليوم من خلال خدمة Nab Foot الجديد المميزه في توفير البث المباشر باكثر من جوده يعمل على اقل سرعة من النت ، وسوف تتمكن من مشاهدة المباراة على موقع كورة اونلاين حصري بدون اى اعلانات مزعجك في اي مكان من خلال الجوال او الموبايل لمشاهدة مباريات فريقك المفضل في جميع البطولات.
+
+          موقع كورة اونلاين بث مباشر مباريات اليوم جوال بدون تقطيع في جميع البطولات من خلال رابط Match live الذى يعد احد اهم مواقع</p>
+    </div>
+</div>
+<footer>
+  <div class="left">
+    <span>Designed by Nab Football</span>
+  </div>
+  <div class="logo">
+      <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Match live">
+    </div>
+  <div class="right">
+    <span>&copy; 2023 Match live , All rights reserved</span>
+  </div>
+</footer>
+   
+</body>
+</html>

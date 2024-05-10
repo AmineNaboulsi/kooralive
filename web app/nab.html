@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Match Status</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Match live</h1>
+            <a href="today.html">
+                <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Nab Football" class="pic" >
+                        </a>
+            <nav>
+                <ul>
+                    <li><a href="yesterday.html">مباريات الأمس</a></li>
+                    <li><a href="today.html">مباريات اليوم</a></li>
+                    <li><a href="tomorow.html">مباريات الغد</a></li>
+                    
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+
+    <div class="albaflex">
+        <div class="match-container commingsoon">
+        <a title="تفاصيل وموعد مباراة أتليتكو مدريد  و ألميريا بتاريخ 2023-04-16 في دوري الدوري الإسباني" href="index.html">
+           <div class="right-team">
+              <div class="team-logo">
+              <img alt="أتليتكو مدريد" data-src="http://koooralive.online/wp-content/uploads/2022/04/147.png" class="hqy-lazy hqy-loaded" height="70" src="http://koooralive.online/wp-content/uploads/2022/04/147.png" title="أتليتكو مدريد" width="70" loading="lazy">
+              </div>
+              <div class="team-name">أتليتكو مدريد</div>
+           </div>
+           <div class="match-center">
+            <div class="match-timing">
+                <div id="match-time">
+                    10:00 AM
+                </div>
+                <div id="result" style="display: none;">
+                    0-0
+                </div>
+                <div class="date not-start" data-start="" data-gameends=""> <p>لم تبدأ بعد </p></div>
+            </div>
+        </div>
+           <div class="left-team">
+              <div class="team-logo">
+              <img alt="إشبيلية" data-src="http://koooralive.online/wp-content/uploads/2022/04/126.png" class="hqy-lazy hqy-loaded" height="70" src="http://koooralive.online/wp-content/uploads/2022/04/126.png" title="إشبيلية" width="70" loading="lazy">
+            </div>
+              <div class="team-name">إشبيلية</div>
+           </div>
+           <div class="match-info">
+              <ul>
+                 <li><span>beIN SPORTS 1 HD</span></li>
+                 <li><span>علي محمد علي</span></li>
+                 <li><span>الدوري الإسباني</span></li>
+              </ul>
+           </div>
+           <div class="overlay-match">
+            <div class="play-icon">
+                <!-- SVG for play icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="62px" height="62px">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </div>
+           </div></a>
+     </div>
+    </div>
+
+    <script>
+        const colors = ["green", "red", "grey",]; // Add more colors if you like
+        let colorIndex = 0;
+
+        
+
+
+        function updateMatchStatus(startTime, endTime) {
+            const currentTime = new Date();
+
+            startTime = new Date(startTime);
+            endTime = new Date(endTime);
+
+            const dateDiv = document.querySelector(".date");
+
+            if (currentTime < startTime) {
+                dateDiv.innerText = 'لم تبدأ بعد';
+                colorIndex = 0;
+            } else if (currentTime >= startTime && currentTime <= endTime) {
+                dateDiv.innerText = ' جارية الآن';
+                colorIndex = 1;
+            } else {
+                dateDiv.innerText = 'إنتهت المباراة';
+                colorIndex = 2;
+            }
+
+            
+        dateDiv.style.background = colors[colorIndex];
+        }
+
+        function observeDateDivChanges() {
+            const dateDiv = document.querySelector(".date");
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.type === "attributes") {
+                        const startTime = dateDiv.getAttribute("data-start");
+                        const endTime = dateDiv.getAttribute("data-gameends");
+                        updateMatchStatus(startTime, endTime);
+                    }
+                });
+            });
+
+            observer.observe(dateDiv, { attributes: true });
+        }
+
+        // Example usage: Replace "startDateTime" and "endDateTime" with the actual start and end times in ISO 8601 format.
+        const startDateTime = "2023-08-06T19:11:00+01:00";
+        const endDateTime = "2023-08-06T20:12:00+01:00";
+
+        updateMatchStatus(startDateTime, endDateTime);
+        observeDateDivChanges();
+    </script>
+</body>
+</html>
+
+

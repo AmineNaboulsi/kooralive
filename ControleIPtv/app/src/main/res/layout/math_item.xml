@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="15dp"
+    android:background="@drawable/shape_math"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/TeamB_flag_tr"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="-50dp"
+        android:alpha="0.5"
+        android:src="@drawable/france"
+        app:layout_constraintBottom_toTopOf="@+id/txt_dirbi"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/TeamA_flag_tr"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="-50dp"
+        android:alpha="0.5"
+        android:src="@drawable/maroc"
+        app:layout_constraintBottom_toTopOf="@+id/txt_channel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/TeamA_flag"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/maroc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Date_debut" />
+
+    <TextView
+        android:id="@+id/txt_Date_debut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="5:12 PM"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_Date_fin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="5:12 PM"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Date_debut" />
+
+    <TextView
+        android:id="@+id/textView_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="0 - 0"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/TeamB_flag"
+        app:layout_constraintStart_toEndOf="@+id/TeamA_flag"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Date_fin" />
+
+    <TextView
+        android:id="@+id/txt_terrain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:gravity="center"
+        android:text="cm"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/TeamB_flag_tr"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/TeamA_flag_tr"
+        app:layout_constraintTop_toBottomOf="@+id/textView_score" />
+
+    <ImageView
+        android:id="@+id/TeamB_flag"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/france"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Date_debut" />
+
+    <TextView
+        android:id="@+id/TeamA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Maroc"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TeamA_flag"
+        app:layout_constraintStart_toStartOf="@+id/TeamA_flag"
+        app:layout_constraintTop_toBottomOf="@+id/TeamA_flag" />
+
+    <TextView
+        android:id="@+id/TeamB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Dirbi"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/TeamB_flag"
+        app:layout_constraintStart_toStartOf="@+id/TeamB_flag"
+        app:layout_constraintTop_toBottomOf="@+id/TeamB_flag" />
+
+    <TextView
+        android:id="@+id/txt_channel"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="channel "
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/TeamA_flag_tr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TeamA" />
+
+    <TextView
+        android:id="@+id/txt_dirbi"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="dirbii"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/TeamB_flag_tr"
+        app:layout_constraintTop_toBottomOf="@+id/TeamB" />
+</androidx.constraintlayout.widget.ConstraintLayout>

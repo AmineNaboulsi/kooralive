@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/yesterdat"
+        android:icon="@drawable/arrowdown"
+        android:iconTintMode="screen"
+        android:iconTint="#A80A04"
+        android:title="yesterdat"/>
+    <item android:id="@+id/today"
+        android:icon="@drawable/arrow"
+        android:iconTint="#02A506"
+        android:iconTintMode="screen"
+        android:title="Today"/>
+    <item android:id="@+id/tomorrow"
+        android:icon="@drawable/arrowup"
+        android:iconTintMode="screen"
+        android:iconTint="#015EC1"
+        android:title="tomorrow"/>
+</menu>

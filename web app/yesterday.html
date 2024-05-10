@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Live NabFootball</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Nab_Football__.png" type="image/png"> <!-- Replace with the actual path to your icon -->
+
+    
+
+</head>
+<style>
+    @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  
+  .match-box {
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-image: url('background.jpg'); 
+
+  }
+  
+  .competition-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #555;
+    padding-top: 2%;
+    
+  }
+  .teams {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .team {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally */
+}
+  .team-name {
+    font-weight: bold;
+    margin-top: 5px;
+    padding-top: 2%;
+    font-size: 26px;
+    color: #333;
+  }
+  .score {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0 20px;
+    color: #e63946;
+  }
+  .match-details {
+    font-size: 16px;
+    color: #555;
+    padding-bottom: 1%;
+  }
+  .time {
+    color: #e63946;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .second-half {
+    color: #457b9d;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .but{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .but-name{
+    align-items: center;
+    text-align: center;
+  }
+  .buts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10%;
+    padding-left: 10%;
+    
+  }
+  @media screen and (max-width: 767px){
+    .score {
+    font-size: 26px;
+    font-weight: bold;
+    color: #e63946;
+  }
+
+}
+@media screen and (max-width: 485px){
+  .team-name {
+    font-weight: bold;
+    margin-top: 5px;
+    padding-top: 2%;
+    font-size: 18px;
+    color: #333;
+  }
+  .team-logo {
+    max-width:100px ;
+    max-height:100px ;
+  }
+  .time {
+    font-size: 18px;
+  }
+  .second-half {
+    font-size: 18px;
+  }
+  .match-details .second-half{
+    display: none;
+  }
+  .buts{
+    padding-bottom: 2%;
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+}
+
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Match live</h1>
+            <a href="today.html">
+                <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Nab Football" class="pic" >
+                        </a>
+            <nav>
+                <ul>
+                    <li><a href="yesterday.html">مباريات الأمس</a></li>
+                    <li><a href="today.html">مباريات اليوم</a></li>
+                    <li><a href="tomorow.html">مباريات الغد</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7759663803634666"
+    crossorigin="anonymous"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push(
+         { google_ad_client: "ca-pub-7759663803634666",
+          enable_page_level_ads: true 
+         }); </script>
+
+    <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-7759663803634666"
+    data-ad-slot="3658458925"
+    data-ad-format="auto"
+    data-full-width-responsive="true">
+  </ins>
+
+    <div class="container">
+        <div class="center-box">
+          <div class="box-title">
+        <h1 class="boxstitle">
+            <strong>أهم مباريات اليوم</strong>
+        </h1>
+        <ul class="nav-tabs">
+            <li class="yema">
+                <a href="yesterday.html"><strong>مباريات الأمس</strong></a>
+            </li>
+            <li class="toma">
+                <a href="today.html"><strong>مباريات اليوم</strong></a>
+            </li>
+            <li class="tomat">
+                <a href="tomorow.html"><strong>مباريات الغد</strong></a>
+            </li>
+        </ul>
+        <br>  <hr>
+        </div>
+        
+
+        <ul class="match-list" id="matchList">
+           
+        
+          </ul>
+
+        <script>
+            const firebaseConfig = {
+              apiKey: "AIzaSyAqrwNjKdOU3ushEVHVJkAGi7H2GCFf-f8",
+              authDomain: "iptv-ed2fd.firebaseapp.com",
+              projectId: "iptv-ed2fd",
+              storageBucket: "iptv-ed2fd.appspot.com",
+              messagingSenderId: "786992942535",
+              appId: "1:786992942535:web:08a7c01d0da525cba15de2",
+              measurementId: "G-DCP709H71M"
+            };
+            const app = firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            let  match_res ="no";
+                    // Assuming 'db' is your Firestore instance
+
+
+            
+      db.collection("match").get().then((querySnapshot) => {
+        const matchList = document.getElementById("matchList");
+        querySnapshot.forEach((doc) => {
+          const matchData = doc.data();
+          const matchItem = document.createElement("li");
+          matchItem.classList.add("match-item");
+          console.log("start");
+          let matchEventsList_teamA = '';
+            let matchEventsList_teamB = '';
+          const matchEvents_teamA = matchData.goals_teamA.split("/");
+
+          for (let i = 0; i < matchEvents_teamA.length; i++) {
+              matchEventsList_teamA += `<li>${matchEvents_teamA[i]}</li>`;
+          }
+          console.log("sala 1");
+
+          const matchEvents_teamB = matchData.goals_teamB.split("/");;
+          for (let i = 0; i < matchEvents_teamB.length; i++) {
+               matchEventsList_teamB += `<li>${matchEvents_teamB[i]}</li>`;
+          }
+          console.log("sala 2");
+
+          const datee = matchData.date_debut.split("T");
+          const timematch = datee[1].split(":");
+          if(compare_date(datee[0]) == "yesterday"){
+            match_res = "yes";
+           let dd = updateMatchStatus(matchData.date_debut, matchData.date_fin);
+           const part = dd.split("/");
+           console.log(part[0] +' and '+part[1]);
+            matchItem.innerHTML = `
+            <div class="albaflex">
+              <a title="نتيجة مباراة a ${matchData.teamA} و ${matchData.teamB}" >
+        <div class="match-box">
+    <p class="competition-name">${matchData.dawri}</p>
+    <div class="teams">
+      <div class="team">
+        <img class="team-logo" src="${matchData.teamB_flag}" alt="${matchData.teamB}">
+        <div class="team-name">${matchData.teamB}</div>
+      </div>
+      <div class="score">${matchData.teamB_score} - ${matchData.teamA_score}</div>
+      <div class="team">
+        <img class="team-logo" src="${matchData.teamA_flag}" alt="${matchData.teamA}">
+        <div class="team-name">${matchData.teamA}</div>
+      </div>
+    </div>
+    <div class="buts">
+      <div class="but">
+        <div class="but-name">
+        <ul style="list-style: none;">
+          ${matchEventsList_teamB}
+        </ul>
+      </div>
+      </div>
+      <div class="score">   </div>
+      <div class="but">
+        <div class="but-name">
+        <ul style="list-style: none;">
+          ${matchEventsList_teamA}
+
+        </ul>
+      </div>
+      </div>
+    </div>
+    <div class="match-details">     
+          <p class="time">إنتهت المباراة</p>
+      <p class="second-half">${matchData.channel}</p>
+    </div>
+         
+         
+         
+         
+         <div class="overlay-match">
+          <div class="play-icon">
+              <!-- SVG for play icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="62px" height="62px">
+                  <path d="M8 5v14l11-7z"/>
+              </svg>
+          </div>
+         </a>
+   </div>
+  </div>
+    `;
+    const documentId = doc.id;
+    matchItem.addEventListener('click', () => {
+                handleMatchItemClick(documentId); // Pass the matchData to the event handler
+            });
+            
+            matchList.appendChild(matchItem);
+
+          }
+          
+        });
+            if(match_res == "no"){
+      const matchList = document.getElementById("matchList");
+        const matchItem = document.createElement("li");
+        matchItem.classList.add("match-item");
+        matchItem.innerHTML = `
+      <div class="nothing_text">
+        <h1>
+        لا توجد مباريات الامس
+      </h1></div>
+        `
+        matchList.appendChild(matchItem);
+    }
+      }).catch((error) => {
+        console.error("Error fetching matches:", error);
+      });
+                  </script>
+        </div>
+    </div>
+    
+    
+
+    <div class="container">
+        <div class="center-live">
+            <a href="today.html">
+                <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Nab Football" class="pic" >
+                        </a>
+            <hr>
+            <p>موقع كورة اونلاين بث مباشر مباريات اليوم جوال بدون تقطيع في جميع البطولات من خلال رابط Match live الذى يعد احد اهم مواقع البث المباشر التي يقدم لكم مشاهدة اهم مباريات اليوم عبر قنوات Nab Foot حصري في جميع البطولات العربية والعالمة الاوروبية منها والمحالية لجميع اندية العالم وكذلك مشاهدة مباريات المنتخبات في كافة البطولات ، على موقع كورة اونلاين سوف تجد جميع روابط البث المباشر لمباريات اليوم من خلال خدمة Nab Foot الجديد المميزه في توفير البث المباشر باكثر من جوده يعمل على اقل سرعة من النت ، وسوف تتمكن من مشاهدة المباراة على موقع كورة اونلاين حصري بدون اى اعلانات مزعجك في اي مكان من خلال الجوال او الموبايل لمشاهدة مباريات فريقك المفضل في جميع البطولات.
+
+                موقع كورة اونلاين بث مباشر مباريات اليوم جوال بدون تقطيع في جميع البطولات من خلال رابط Match live الذى يعد احد اهم مواقع</p>
+          </div>
+    </div>
+
+    <footer>
+        <div class="left">
+          <span>Designed by Nab Football</span>
+        </div>
+        <div class="logo">
+            <img src="https://firebasestorage.googleapis.com/v0/b/iptv-ed2fd.appspot.com/o/Nab%20Football.png?alt=media&token=d0827134-d1e4-402f-9ac5-a1d1384a62b4" alt="Match live">
+          </div>
+        <div class="right">
+          <span>&copy; 2023 Match live , All rights reserved</span>
+        </div>
+      </footer>
+
+      <script>
+        const colors = ["green", "red", "grey",]; // Add more colors if you like
+        let colorIndex = 0;
+
+
+        function updateMatchStatus(startTime, endTime) {
+            const currentTime = new Date();
+
+            startTime = new Date(startTime);
+            endTime = new Date(endTime);
+            
+
+            if (currentTime < startTime ) {
+                return 'لم تبدأ بعد'+'/'+colors[0]+';';
+            } else if (currentTime >= startTime && currentTime <= endTime) {
+                return  ' جارية الآن'+'/'+colors[1]+';animation: blink 500ms ease-in-out infinite;';
+            } else {
+                return 'إنتهت المباراة'+'/'+colors[2]+';';
+            }
+        }
+        function handleMatchItemClick(documentId) {
+        
+        const nextPageURL = `math_page.html?utm_source=${"today/"+documentId}`;
+        window.location.href = nextPageURL;
+   
+    }
+        function observeDateDivChanges() {
+            const dateDiv = document.querySelector(".date");
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.type === "attributes") {
+                        const startTime = dateDiv.getAttribute("data-start");
+                        const endTime = dateDiv.getAttribute("data-gameends");
+                        updateMatchStatus(startTime, endTime);
+                    }
+                });
+            });
+
+            observer.observe(dateDiv, { attributes: true });
+        }
+
+    </script>
+   <script>
+     function compare_date(targetDateString) {
+      const currentDate = new Date();
+
+      const currentDay = String(currentDate.getDate()).padStart(2, '0');
+      const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const currentYear = currentDate.getFullYear();
+      const formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+      // Calculate the difference in days
+      const match_parts = formattedCurrentDate.split("-");
+      const today_parts = targetDateString.split("-");
+
+    if (
+    today_parts[0] === match_parts[0] &&
+    today_parts[1] === match_parts[1] &&
+    today_parts[2] === match_parts[2]
+) {
+  console.log("today : "+formattedCurrentDate+" math : "+targetDateString+"is today");
+    return "today";
+} else if (
+    today_parts[0] === match_parts[0] &&
+    today_parts[1] === match_parts[1] &&
+    Number(today_parts[2]) - Number(match_parts[2]) === 1
+) {
+  console.log("today : "+formattedCurrentDate+" math : "+targetDateString+"is tomorrow");
+  return "tomorrow";
+} else if (
+    today_parts[0] === match_parts[0] &&
+    today_parts[1] === match_parts[1] &&
+    Number(match_parts[2]) - Number(today_parts[2]) === 1
+) {
+  console.log("today : "+formattedCurrentDate+" math : "+targetDateString+"is yesterday");
+
+  return "yesterday";
+
+} else {
+  return "null";
+}
+
+}
+
+    
+</script>
+</body>
+</html>

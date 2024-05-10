@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "786992942535",
+    "project_id": "iptv-ed2fd",
+    "storage_bucket": "iptv-ed2fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786992942535:android:2933c389cdf96d7aa15de2",
+        "android_client_info": {
+          "package_name": "com.almosi9are.controleiptv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786992942535-8elarah6oqrrb4jgejchba8d3o4us30i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2lS0_18uWBDq3FPle6qXPy7R63zs_t70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786992942535-8elarah6oqrrb4jgejchba8d3o4us30i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
